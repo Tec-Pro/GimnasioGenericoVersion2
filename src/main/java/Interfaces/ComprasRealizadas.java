@@ -241,7 +241,7 @@ private DefaultTableModel tablaComprasDefault;
     }// </editor-fold>//GEN-END:initComponents
 
     private void pagarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarFacActionPerformed
-System.out.println("realizar pago pulsado");
+//System.out.println("realizar pago pulsado");
              Base.openTransaction();
             realizarPagoGui = new RealizarPagoGui(papa, true, proveedor, (Compra)Compra.findById(tablaCompras.getValueAt(tablaCompras.getSelectedRow(), 0)));
             realizarPagoGui.setLocationRelativeTo(this);

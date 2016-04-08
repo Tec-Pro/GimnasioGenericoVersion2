@@ -83,14 +83,14 @@ public class ABMSocios {
             Iterator<Socioarancel> i = l.iterator();
             while(i.hasNext()){
                 Socioarancel soar = i.next();
-                System.out.println(soar.get("id_arancel"));
+                //System.out.println(soar.get("id_arancel"));
                 soar.delete();
 //                soar.saveIt();
             }
             Iterator<Arancel> it = act.iterator();
             while(it.hasNext()){
                 Arancel a = it.next();
-               // System.out.println(a.get("nombre"));
+               // //System.out.println(a.get("nombre"));
                 Socio so = Socio.first("DNI = ?", dniViejo);
                 Socioarancel sa = Socioarancel.create("id_socio", so.get("ID_DATOS_PERS"), "id_arancel", a.get("id"));
                 sa.saveIt();

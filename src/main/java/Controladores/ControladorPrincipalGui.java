@@ -368,7 +368,7 @@ public class ControladorPrincipalGui implements ActionListener {
             modulo.GuardarRutaBackup();
             modulo.CrearBackup();
             String dir = (new File(System.getProperty("user.dir")).getAbsolutePath());
-            System.out.println(dir);
+            //System.out.println(dir);
         }
         if (ae.getSource() == principalGui.getCargarBackup()) {
             int confirmado = JOptionPane.showConfirmDialog(null, "¿Confirmas la restauración de la Base de Datos?");

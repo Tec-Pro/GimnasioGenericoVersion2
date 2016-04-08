@@ -88,7 +88,7 @@ public class Modulo {
             Runtime rt = Runtime.getRuntime();
             try {
                 String command = installMysql + "mysqldump --opt -u " + login + " -p" + password + " -h localhost " + bd + " -r \"" + rutabackup + ".sql\"";
-                System.out.println(command);
+                //System.out.println(command);
                 rt.exec(command);
                 JOptionPane.showMessageDialog(null, "Backup creado exitosamente! Se cerrará el programa, debe abrirlo de nuevo");
                 System.exit(1);
@@ -102,9 +102,9 @@ public class Modulo {
     }
 
     public void RestaurarBackup() throws InterruptedException, IOException {
-        System.out.println(DB.getCurrrentConnectionNames().size());
+        //System.out.println(DB.getCurrrentConnectionNames().size());
         DB.closeAllConnections();
-        System.out.println(DB.getCurrrentConnectionNames().size());
+        //System.out.println(DB.getCurrrentConnectionNames().size());
         Statement sentencia = null;
         if (selecRestauraBack == 1) {
             if (conn != null) {
@@ -220,7 +220,7 @@ public class Modulo {
                     byte[] buffer = new byte[1024];
                     int leido = es.read(buffer);
                     while (leido > 0) {
-                        System.out.println(new String(buffer, 0, leido));
+                        //System.out.println(new String(buffer, 0, leido));
                         leido = es.read(buffer);
                     }
                     es.close();
@@ -237,13 +237,13 @@ public class Modulo {
         byte buffer[] = new byte[1024];
         int leido = fis.read(buffer);
         while (leido > 0) {
-            System.out.println(leido);
+            //System.out.println(leido);
             os.write(buffer, 0, leido);
             leido = fis.read(buffer);
         }
         os.close();
         fis.close();
-        System.out.println("termine de cargar el backup");
+        //System.out.println("termine de cargar el backup");
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
 
     }
@@ -254,7 +254,7 @@ public class Modulo {
         try {
             String dir = (new File(System.getProperty("user.dir")).getAbsolutePath());
             String command = installMysql + "mysqldump --opt -u " + login + " -p" + password + " -h localhost " + bd + " -r \"" + dir + "/backupEmail.sql\"";
-            System.out.println(command);
+            //System.out.println(command);
             rt.exec(command);
         } catch (IOException ex) {
             ex.printStackTrace();

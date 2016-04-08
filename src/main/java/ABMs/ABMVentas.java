@@ -111,11 +111,11 @@ public class ABMVentas {
         for(Triple t: listaArticulos){
             Articulo a = Articulo.first("id = ?", t.getIdArticulo());
             if(a != null){
-                System.out.println(a.get("id"));
+                //System.out.println(a.get("id"));
                 newStock = a.getBigDecimal("stock").subtract(t.getCantidad());
                 a.set("stock",newStock);
                 result = result && a.saveIt();
-                System.out.println(newStock);
+                //System.out.println(newStock);
             }else{
                 Base.commitTransaction();
                  

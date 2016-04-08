@@ -419,7 +419,7 @@ public class RealizarPagoGui extends javax.swing.JDialog {
                 compraAPagar = it.next();
                 if (entreMasDif>=(compraAPagar.getFloat("monto"))) {
                     sePuedePagar= true;
-                    System.out.println("estoy pagando");
+                    //System.out.println("estoy pagando");
                         Base.openTransaction();
                         compraAPagar.setBoolean("pago", true);
                         compraAPagar.set("fecha_pago", sqlFecha);
@@ -435,7 +435,7 @@ public class RealizarPagoGui extends javax.swing.JDialog {
                 Base.commitTransaction();
             }
         else {
-            System.out.println("pago la factura copleta");
+            //System.out.println("pago la factura copleta");
             Base.openTransaction();
             compra.setBoolean("pago", true);
             compra.set("fecha_pago", sqlFecha);
@@ -453,7 +453,7 @@ public class RealizarPagoGui extends javax.swing.JDialog {
         
         JOptionPane.showMessageDialog(this, "¡Pago registrado correctamente");
 //        try {
-//            System.out.println(Integer.valueOf(pagoId));
+//            //System.out.println(Integer.valueOf(pagoId));
 //            controladorReporte.mostrarPagoProv(Integer.valueOf(pagoId));
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(RealizarPagoGui.class.getName()).log(Level.SEVERE, null, ex);

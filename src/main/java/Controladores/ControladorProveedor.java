@@ -126,7 +126,7 @@ public class ControladorProveedor implements ActionListener {
     }
 
     public void busquedaKeyReleased(java.awt.event.KeyEvent evt) {
-        System.out.println("apreté el caracter: " + evt.getKeyChar());
+        //System.out.println("apreté el caracter: " + evt.getKeyChar());
         realizarBusqueda();
     }
 
@@ -151,7 +151,7 @@ public class ControladorProveedor implements ActionListener {
             proveedorGui.getBorrarPago().setEnabled(false);
             proveedorGui.getArticulosProvee().setEnabled(true);
             proveedorGui.getComprasRealizadas().setEnabled(true);
-            System.out.println("hice doble click en un proveedor");
+            //System.out.println("hice doble click en un proveedor");
             proveedorGui.limpiarCampos();
             Base.openTransaction();
             proveedor = Proveedor.findFirst("id = ?", tablaProveedor.getValueAt(tablaProveedor.getSelectedRow(), 0));
@@ -182,7 +182,7 @@ public class ControladorProveedor implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == proveedorGui.getNuevo()) {
-            System.out.println("Boton nuevo pulsado");
+            //System.out.println("Boton nuevo pulsado");
             proveedorGui.limpiarCampos();
             proveedorGui.habilitarCampos(true);
             proveedorGui.getArticulosProvee().setEnabled(false);
@@ -196,7 +196,7 @@ public class ControladorProveedor implements ActionListener {
             proveedorGui.getCuenta().setText("0.00");
         }
         if (e.getSource() == proveedorGui.getGuardar() && editandoInfo && isNuevo) {
-            System.out.println("Boton guardar pulsado");
+            //System.out.println("Boton guardar pulsado");
             Base.openTransaction();
             if (cargarDatosProv(proveedor)) {                
                 if (abmProveedor.alta(proveedor)) {
@@ -215,7 +215,7 @@ public class ControladorProveedor implements ActionListener {
             Base.commitTransaction();
         }
         if (e.getSource() == proveedorGui.getBorrar()) {
-            System.out.println("Boton borrar pulsado");
+            //System.out.println("Boton borrar pulsado");
             Base.openTransaction();
             proveedorGui.habilitarCampos(false);
             if (proveedor.getId() != null && !editandoInfo) {
@@ -241,7 +241,7 @@ public class ControladorProveedor implements ActionListener {
             Base.commitTransaction();
         }
         if (e.getSource() == proveedorGui.getModificar()) {
-            System.out.println("Boton modificar pulsado");
+            //System.out.println("Boton modificar pulsado");
             proveedorGui.habilitarCampos(true);
             editandoInfo = true;
             isNuevo = false;
@@ -252,7 +252,7 @@ public class ControladorProveedor implements ActionListener {
         }
 
         if (e.getSource() == proveedorGui.getGuardar() && editandoInfo && !isNuevo) {
-            System.out.println("Boton guardar pulsado");
+            //System.out.println("Boton guardar pulsado");
             Base.openTransaction();
             if (cargarDatosProv(proveedor)) {                
                 if (abmProveedor.modificar(proveedor)) {
@@ -271,7 +271,7 @@ public class ControladorProveedor implements ActionListener {
             Base.commitTransaction();
         }
         if (e.getSource() == proveedorGui.getRealizarPago()) {
-            System.out.println("realizar pago pulsado");
+            //System.out.println("realizar pago pulsado");
             realizarPagoGui = new RealizarPagoGui(aplicacionGui, true, proveedor);
             realizarPagoGui.setLocationRelativeTo(proveedorGui);
             realizarPagoGui.setVisible(true);            
@@ -280,7 +280,7 @@ public class ControladorProveedor implements ActionListener {
             cargarPagos();            
         }
         if (e.getSource() == proveedorGui.getBorrarPago()) {
-            System.out.println("Borrar pago pulsado");
+            //System.out.println("Borrar pago pulsado");
             Base.openTransaction();
             Integer resp = JOptionPane.showConfirmDialog(proveedorGui, "¿Desea borrar el pago seleccionado? ", "Confirmar borrado", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
@@ -341,7 +341,7 @@ public class ControladorProveedor implements ActionListener {
         boolean ret = true;
         try {
             String nombre = TratamientoString.eliminarTildes(proveedorGui.getNombre().getText());
-            System.out.println(nombre);
+            //System.out.println(nombre);
             prov.set("nombre", nombre);
         } catch (ClassCastException e) {
             ret = false;
@@ -364,7 +364,7 @@ public class ControladorProveedor implements ActionListener {
         }
          try {
             String cuit = TratamientoString.eliminarTildes(proveedorGui.getCuit().getText());
-            System.out.println(cuit);
+            //System.out.println(cuit);
             prov.set("cuit", cuit);
         } catch (ClassCastException e) {
             ret = false;
@@ -372,7 +372,7 @@ public class ControladorProveedor implements ActionListener {
         }
           try {
             String direccion = TratamientoString.eliminarTildes(proveedorGui.getDireccion().getText());
-            System.out.println(direccion);
+            //System.out.println(direccion);
             prov.set("direccion", direccion);
         } catch (ClassCastException e) {
             ret = false;
@@ -380,7 +380,7 @@ public class ControladorProveedor implements ActionListener {
         }
            try {
             String celular = TratamientoString.eliminarTildes(proveedorGui.getCelular().getText());
-            System.out.println(celular);
+            //System.out.println(celular);
             prov.set("celular", celular);
         } catch (ClassCastException e) {
             ret = false;
@@ -388,7 +388,7 @@ public class ControladorProveedor implements ActionListener {
         }
   try {
             String email = TratamientoString.eliminarTildes(proveedorGui.getEmail().getText());
-            System.out.println(email);
+            //System.out.println(email);
             prov.set("email", email);
         } catch (ClassCastException e) {
             ret = false;
@@ -396,7 +396,7 @@ public class ControladorProveedor implements ActionListener {
         }
              try {
             String formaPago = TratamientoString.eliminarTildes(proveedorGui.getFormaPago().getText());
-            System.out.println(formaPago);
+            //System.out.println(formaPago);
             prov.set("forma_de_pago", formaPago);
         } catch (ClassCastException e) {
             ret = false;
