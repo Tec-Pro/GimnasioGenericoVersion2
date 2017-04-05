@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Pago;
 import Modelos.Pagoproveedor;
 import Utiles.DatosGenericos;
@@ -106,11 +107,6 @@ public class MovimientosDelDiaGui extends javax.swing.JInternalFrame {
             }
         } else {
             return "";
-        }
-    }
-        public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
         }
     }
 

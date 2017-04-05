@@ -5,6 +5,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Ejercicio;
 import Utiles.DatosGenericos;
 import org.javalite.activejdbc.Base;
@@ -14,12 +15,7 @@ import org.javalite.activejdbc.Base;
  * @author A
  */
 public class ABMEjercicios {
-    
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
+   
 
     public boolean Alta(Ejercicio a) {
         boolean res = true;

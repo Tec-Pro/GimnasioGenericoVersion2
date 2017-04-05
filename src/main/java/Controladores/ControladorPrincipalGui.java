@@ -4,6 +4,13 @@
  */
 package Controladores;
 
+
+import static BD.ConexionBD.AbrirRutaBackup;
+import static BD.ConexionBD.CrearBackup;
+import static BD.ConexionBD.GuardarRutaBackup;
+import static BD.ConexionBD.RestaurarBackup;
+import static BD.ConexionBD.abrirBase;
+import static BD.ConexionBD.initDB;
 import Interfaces.AbmAlimentosGui;
 import Interfaces.ActividadesGui;
 import Interfaces.BusquedaGui;
@@ -42,12 +49,14 @@ import Interfaces.ProveedorGui;
 import Modelos.User;
 import Utiles.DatosGenericos;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
+import com.mchange.v2.c3p0.DataSources;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import net.sf.jasperreports.engine.JRException;
 import org.javalite.activejdbc.Base;
 import java.util.Properties;
+import javax.sql.DataSource;
 
 /**
  *
@@ -110,10 +119,10 @@ public class ControladorPrincipalGui implements ActionListener {
             UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
-        abrirBase();
+        initDB();           
         principalGui = new PrincipalGui();
         ingresoGui = new IngresoGui();
-        controladorIngreso = new ControladorIngreso(ingresoGui);
+        //controladorIngreso = new ControladorIngreso(ingresoGui);
         controladorLogin = new ControladorLogin(principalGui, ingresoGui);
         controladorLogin.start();//inicio el thread para la pantalla login asií se carga todo mientras inicias sesion
         principalGui.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -362,25 +371,20 @@ public class ControladorPrincipalGui implements ActionListener {
         }
         
         
-               if (ae.getSource() == principalGui.getCrearBackup()) {
-            modulo = new Modulo();
-            modulo.conectar();
-            modulo.GuardarRutaBackup();
-            modulo.CrearBackup();
-            String dir = (new File(System.getProperty("user.dir")).getAbsolutePath());
+           if (ae.getSource() == principalGui.getCrearBackup()) {
+            GuardarRutaBackup();
+            CrearBackup();
             //System.out.println(dir);
         }
         if (ae.getSource() == principalGui.getCargarBackup()) {
             int confirmado = JOptionPane.showConfirmDialog(null, "¿Confirmas la restauración de la Base de Datos?");
             if (JOptionPane.OK_OPTION == confirmado) {
-                modulo = new Modulo();
-                modulo.conectarMySQL();
-                modulo.AbrirRutaBackup();
+                AbrirRutaBackup();
                 try {
-                    modulo.RestaurarBackup();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ControladorPrincipalGui.class.getName()).log(Level.SEVERE, null, ex);
+                    RestaurarBackup();
                 } catch (IOException ex) {
+                    Logger.getLogger(ControladorPrincipalGui.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(ControladorPrincipalGui.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -396,12 +400,6 @@ public class ControladorPrincipalGui implements ActionListener {
         
     }
     
-            public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException, Exception {
         ControladorPrincipalGui appl = new ControladorPrincipalGui();
 

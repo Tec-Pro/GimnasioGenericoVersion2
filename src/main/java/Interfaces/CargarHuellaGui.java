@@ -6,6 +6,7 @@
 package Interfaces;
 
 import BD.ConexionBD;
+import static BD.ConexionBD.abrirBase;
 import Controladores.ControladorIngreso;
 import com.digitalpersona.onetouch.DPFPFingerIndex;
 import com.digitalpersona.onetouch.DPFPGlobal;
@@ -42,7 +43,6 @@ import javax.swing.UIManager;
 public class CargarHuellaGui extends javax.swing.JDialog {
 
     private EnumMap<DPFPFingerIndex, DPFPTemplate> template = new EnumMap<DPFPFingerIndex, DPFPTemplate>(DPFPFingerIndex.class);
-    ConexionBD con = new ConexionBD();
     private DPFPTemplate templateIndividual;
     private DPFPFingerIndex fingerIndividual;
     private int idCliente;
@@ -60,7 +60,7 @@ public class CargarHuellaGui extends javax.swing.JDialog {
         super(owner, true);
         initComponents();
         ControladorIngreso.Lector.stopCapture();
-        Connection c = con.conectar();
+        Connection c = abrirBase();
         String query = "SELECT * FROM huellas where client_id="+id;
         PreparedStatement stmt = c.prepareStatement(query);
          //stmt.setInt(1,id);
@@ -78,7 +78,6 @@ public class CargarHuellaGui extends javax.swing.JDialog {
         templateIndividual = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer);
         CargarHuellaGui.this.template.put(fingerIndividual, templateIndividual);
         }
-        con.desconectar();
         idCliente = id;
         EnumSet<DPFPFingerIndex> fingers = EnumSet.noneOf(DPFPFingerIndex.class);
         fingers.addAll(template.keySet());
@@ -132,19 +131,15 @@ public class CargarHuellaGui extends javax.swing.JDialog {
     }
 
     private void borrarHuella() {
-        Connection c = con.conectar(); //establece la conexion con la BD
+        Connection c = abrirBase(); //establece la conexion con la BD
         try (PreparedStatement guardarStmt = c.prepareStatement(" DELETE FROM huellas WHERE client_id=" + idCliente)) {
             //Ejecuta la sentencia
             guardarStmt.execute();
             JOptionPane.showMessageDialog(null, "Huella borrada Correctamente");
-            con.desconectar();
         } catch (SQLException ex) {
             //Si ocurre un error lo indica en la consola
             System.err.println("Error al borrar los datos de la huella." + ex);
-        } finally {
-            con.desconectar();
         }
-
     }
 
     public void guardarHuella() {
@@ -156,7 +151,7 @@ public class CargarHuellaGui extends javax.swing.JDialog {
         //Pregunta el nombre de la persona a la cual corresponde dicha huella
         try {
             //Establece los valores para la sentencia SQL
-            Connection c = con.conectar(); //establece la conexion con la BD
+            Connection c = abrirBase(); //establece la conexion con la BD
             try (PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO huellas(huella, dedo,client_id) values(?,?,?)")) {
                 guardarStmt.setBinaryStream(1, datosHuella, tamañoHuella);
                 guardarStmt.setString(2, fingerIndividual.toString());
@@ -165,12 +160,9 @@ public class CargarHuellaGui extends javax.swing.JDialog {
                 guardarStmt.execute();
             }
             JOptionPane.showMessageDialog(null, "Huella Guardada Correctamente");
-            con.desconectar();
         } catch (SQLException ex) {
             //Si ocurre un error lo indica en la consola
             System.err.println("Error al guardar los datos de la huella." + ex);
-        } finally {
-            con.desconectar();
         }
     }
 

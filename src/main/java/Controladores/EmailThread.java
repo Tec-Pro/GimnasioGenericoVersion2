@@ -36,7 +36,7 @@ public class EmailThread extends Thread {
             java.sql.Date.valueOf(sqlFecha.toString());
             if (sqlFecha.toString().equals(fechaEnviado.toString()) || sqlFecha.after(fechaEnviado)) {
                 Modulo moduloBackUp = new Modulo();
-                moduloBackUp.CrearBackupSilencioso();
+                //moduloBackUp.CrearBackupSilencioso();
                 try {
                     enviar.enviarMail("", "");
                 } catch (MessagingException ex) {
@@ -47,7 +47,7 @@ public class EmailThread extends Thread {
             }
         } else {
             Modulo moduloBackUp = new Modulo();
-            moduloBackUp.CrearBackupSilencioso();
+            //moduloBackUp.CrearBackupSilencioso();
             try {
                 enviar.enviarMail("", "");
             } catch (MessagingException ex) {

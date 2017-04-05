@@ -6,6 +6,7 @@
 package Controladores;
 
 import ABMs.ABMArticulos;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.ArticulosGUI;
 import Modelos.Articulo;
 import Modelos.Proveedor;
@@ -177,12 +178,6 @@ public class ControladorArticuloGUI implements ActionListener {
             articulosGUI.getTablaArticulosDefault().addRow(row);
         }
 
-    }
-
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
     }
 
     private boolean CodigoOK() {

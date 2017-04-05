@@ -5,6 +5,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Dia;
 import Modelos.DiasEjercicios;
 import Modelos.Ejercicio;
@@ -24,12 +25,6 @@ public class ABMRutinas {
 
     String idRutina = null;
     int idDia;
-
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
     public boolean Alta(Rutina a) {
         boolean res = true;

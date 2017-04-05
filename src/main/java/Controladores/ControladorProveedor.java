@@ -6,6 +6,7 @@ package Controladores;
 
 
 import ABMs.ABMProveedor;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.ArticulosGUI;
 import Interfaces.ArticulosProvee;
 import Interfaces.CompraGui;
@@ -100,11 +101,7 @@ public class ControladorProveedor implements ActionListener {
 
     }
 
-       public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
+
     public void cargarTodos() {
         abrirBase();
         Base.openTransaction();

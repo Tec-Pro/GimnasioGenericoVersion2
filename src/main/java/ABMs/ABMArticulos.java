@@ -5,6 +5,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Articulo;
 import Utiles.DatosGenericos;
 import org.javalite.activejdbc.Base;
@@ -15,11 +16,6 @@ import org.javalite.activejdbc.Base;
  */
 public class ABMArticulos {
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
     public boolean Alta(Articulo a) {
         boolean res = true;

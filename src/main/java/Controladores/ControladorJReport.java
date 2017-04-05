@@ -4,6 +4,8 @@
  */
 package Controladores;
 
+import BD.ConexionBD;
+import static BD.ConexionBD.abrirBase;
 import Utiles.DatosGenericos;
 import java.io.File;
 import java.io.IOException;
@@ -40,8 +42,8 @@ public class ControladorJReport {
 
     //listado de clientes productos y proveedores.
     public void mostrarReporte() throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, connection);
@@ -51,8 +53,8 @@ public class ControladorJReport {
 
     //listado de clientes productos y proveedores.
     public void mostrarReporteGastos(Date desde, Date hasta) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("desde", desde);
@@ -63,8 +65,8 @@ public class ControladorJReport {
     }
 
     public void mostrarTicketMembresia(Integer idPagoMemb) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("nombre_gimnasio", DatosGenericos.nombreGimnasio);
@@ -77,8 +79,8 @@ public class ControladorJReport {
 
     //listado de clientes productos y proveedores.
     public void mostrarDieta(Integer idSocio, Integer idDieta) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("id_socio", idSocio);
@@ -96,8 +98,8 @@ public class ControladorJReport {
 
     //listado de clientes productos y proveedores.
     public String obtenerDieta(Integer idSocio, Integer idDieta) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("id_socio", idSocio);
@@ -123,8 +125,8 @@ public class ControladorJReport {
     }
 
     public void mostrarRutina(Integer idRutina) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
 
@@ -139,8 +141,8 @@ public class ControladorJReport {
     }
 
     public String obtenerRutina(Integer idRutina) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("rutina_id", idRutina);
@@ -162,8 +164,8 @@ public class ControladorJReport {
     }
 
     public void mostrarTicketVenta(Integer idVenta) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
+        Class.forName(ConexionBD.driver);
+        Connection connection = abrirBase();
         Map parametros = new HashMap();
         parametros.clear();
         parametros.put("id_venta", idVenta);

@@ -7,6 +7,7 @@ package Controladores;
 
 import ABMs.ABMSocios;
 import BD.ConexionBD;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.AsistenciasGui;
 import Interfaces.DietasSocioGui;
 import Interfaces.FelizCumpleGui;
@@ -99,7 +100,6 @@ public class ControladorIngreso implements ActionListener {
     public DPFPFeatureSet featuresinscripcion;
     public DPFPFeatureSet featuresverificacion;
     private IngresoGui ingresoGui;
-    ConexionBD con = new ConexionBD();
     private DPFPTemplate templateIndividual;
     private DPFPFingerIndex fingerIndividual;
     private int idCliente;
@@ -132,11 +132,7 @@ public class ControladorIngreso implements ActionListener {
         ingresoGui.limpiar();
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
+
 
     /*va true si se quiere usar para mostrarla por pantalla es decir 12/12/2014 y false si va 
      para la base de datos, es decir 2014/12/12*/
@@ -274,7 +270,7 @@ public class ControladorIngreso implements ActionListener {
 
     public void identificarHuella() throws IOException {
         try {
-            Connection c = con.conectar();
+            Connection c = abrirBase();
             String query = "SELECT id,huella,dedo, client_id FROM huellas h inner join socios s on h.client_id= s.ID_DATOS_PERS  where  s.ACTIVO = 1";
             PreparedStatement stmt = c.prepareStatement(query);
             //stmt.setInt(1,id);
@@ -322,8 +318,6 @@ public class ControladorIngreso implements ActionListener {
         } catch (SQLException e) {
             //Si ocurre un error lo indica en la consola
             System.err.println("Error al identificar huella dactilar." + e.getMessage());
-        } finally {
-            con.desconectar();
         }
     }
 

@@ -6,6 +6,7 @@
 package Controladores;
 
 import ABMs.ABMEjercicios;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.GuiEjercicios;
 import Modelos.Articulo;
 import Modelos.Ejercicio;
@@ -132,11 +133,7 @@ public class ControladorEjercicios implements ActionListener {
 
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
+
 
     private boolean EjercicioNoExiste() {
         abrirBase();

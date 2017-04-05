@@ -4,6 +4,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Arancel;
 import Modelos.Categoria;
 import Modelos.Dato;
@@ -29,6 +30,7 @@ public class ABMAranceles {
     }
     
     public boolean alta(Arancel s) {
+        abrirBase();
         if (!findArancel(s)) {
             Base.openTransaction();
             Arancel nuevo = Arancel.create("nombre",s.get("nombre"), "precio", s.get("precio"), "fecha", s.get("fecha"), "activo", s.get("activo"),"categoria", s.get("categoria"), "dias", s.getInteger("dias"));

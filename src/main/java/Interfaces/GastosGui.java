@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import static BD.ConexionBD.abrirBase;
 import Controladores.ControladorJReport;
 import Modelos.Categoria;
 import Modelos.Dato;
@@ -560,11 +561,7 @@ public class GastosGui extends javax.swing.JInternalFrame {
         return ret;
     }
     
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
+
    public void cargarGastos(){
         abrirBase();
         LazyList<Gasto> gastos = null;

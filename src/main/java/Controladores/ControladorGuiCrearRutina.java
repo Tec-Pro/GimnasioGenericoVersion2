@@ -7,6 +7,7 @@ package Controladores;
 
 import ABMs.ABMDia;
 import ABMs.ABMRutinas;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.GuiCrearRutina;
 import Modelos.Dia;
 import Modelos.DiasEjercicios;
@@ -893,10 +894,5 @@ public class ControladorGuiCrearRutina implements ActionListener {
         }
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
 }

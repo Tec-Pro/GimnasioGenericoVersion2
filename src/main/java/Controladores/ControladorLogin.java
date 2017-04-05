@@ -5,6 +5,7 @@
 package Controladores;
 
 import ABMs.ManejoUsuario;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.IngresoGui;
 import Interfaces.LoginGUI;
 import Interfaces.PrincipalGui;
@@ -149,11 +150,6 @@ public class ControladorLogin extends Thread implements ActionListener {
 
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
     public LoginGUI getLog() {
         return log;

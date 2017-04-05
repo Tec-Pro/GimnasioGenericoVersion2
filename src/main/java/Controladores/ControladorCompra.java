@@ -5,6 +5,8 @@
 package Controladores;
 
 import ABMs.ABMCompra;
+import BD.ConexionBD;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.CompraGui;
 import Interfaces.PrincipalGui;
 import Interfaces.RealizarPagoGui;
@@ -198,10 +200,7 @@ public class ControladorCompra implements ActionListener, CellEditorListener {
     }
 
     public void cargarTodos() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-
-        }
+        abrirBase();
         tablaProveedores.setRowCount(0);
         provlista = busqueda.filtroProveedor("", "");
         Iterator<Proveedor> it = provlista.iterator();

@@ -5,6 +5,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.DiasEjercicios;
 import Modelos.Ejercicio;
 import Modelos.Dia;
@@ -83,11 +84,5 @@ public class ABMDia {
         }
         Base.commitTransaction();
         return result;
-    }
-   
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
     }
 }

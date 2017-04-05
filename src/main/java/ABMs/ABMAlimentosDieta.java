@@ -5,6 +5,7 @@
  */
 package ABMs;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Alimento;
 import Modelos.AlimentosDietas;
 import Modelos.Dieta;
@@ -131,12 +132,5 @@ public class ABMAlimentosDieta {
         Dieta dieta = Dieta.findById(id);
         
         return dieta;
-    }
-
-   
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
     }
 }

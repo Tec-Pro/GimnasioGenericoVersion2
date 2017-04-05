@@ -6,6 +6,7 @@
 package Controladores;
 
 import ABMs.ABMVentas;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.CalcularVueltoGui;
 import Interfaces.PrincipalGui;
 import Interfaces.CargarVentaGUI;
@@ -185,11 +186,6 @@ public class ControladorCargarVentaGUI implements ActionListener, CellEditorList
 
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
     public void setCellEditor() {
         for (int i = 0; i < cargarVentaGUI.getTablaVenta().getRowCount(); i++) {

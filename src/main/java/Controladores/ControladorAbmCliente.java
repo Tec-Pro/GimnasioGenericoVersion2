@@ -5,6 +5,7 @@
 package Controladores;
 
 import ABMs.ABMSocios;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.AbmClienteGui;
 import Interfaces.CargarHuellaGui;
 import Interfaces.DietasSocioGui;
@@ -733,12 +734,6 @@ public class ControladorAbmCliente implements ActionListener {
 
     public void setIsNuevo(boolean isNuevo) {
         this.isNuevo = isNuevo;
-    }
-
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
     }
 
     public void setSocio(Socio s) {

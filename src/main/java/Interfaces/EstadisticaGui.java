@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Categoria;
 import Modelos.Dato;
 import Modelos.Gasto;
@@ -64,11 +65,6 @@ public class EstadisticaGui extends javax.swing.JDialog {
          return ingreso;
     }
 
-        public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

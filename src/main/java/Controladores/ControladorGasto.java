@@ -1,6 +1,7 @@
 package Controladores;
 
 import ABMs.ABMGastos;
+import static BD.ConexionBD.abrirBase;
 import Interfaces.AddCategoriaGui;
 import Interfaces.AreaGui;
 import Interfaces.GastosGui;
@@ -539,10 +540,5 @@ public class ControladorGasto implements ActionListener {
         }
     }
 
-    public void abrirBase() {
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-    }
 
 }

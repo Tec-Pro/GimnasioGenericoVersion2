@@ -101,12 +101,6 @@ public class ABMSocios {
         }
         return false;
     }
-    
-    public void modbase(){
-         if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-         
-    }
+   
 }
 

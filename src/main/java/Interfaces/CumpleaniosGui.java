@@ -6,6 +6,7 @@
 
 package Interfaces;
 
+import static BD.ConexionBD.abrirBase;
 import Modelos.Arancel;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import Modelos.Socio;
 import Modelos.Socioarancel;
 import Utiles.DatosGenericos;
+import java.util.ArrayList;
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
@@ -55,12 +57,7 @@ public class CumpleaniosGui extends javax.swing.JInternalFrame {
           cargarCumple();
 
     }
-    
-    public void abrirBase(){
-         if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/"+DatosGenericos.dataBaseName, DatosGenericos.userDB, DatosGenericos.passwordDB);
-        }
-        }
+
         
 
                 
@@ -68,7 +65,7 @@ public class CumpleaniosGui extends javax.swing.JInternalFrame {
         cumpleHoyDefault.setRowCount(0);
         cumpleSemanaDefault.setRowCount(0);
          Base.openTransaction();
-             LazyList<Socio> clientes= Socio.findBySQL("select * FROM socios WHERE DATE_FORMAT(fecha_nac, '%m%d') = DATE_FORMAT(?,'%m%d')",dateToMySQLDate(Calendar.getInstance().getTime(),false));
+             LazyList<Socio> clientes= Socio.findBySQL("select * FROM socios WHERE FORMATDATETIME(fecha_nac, '%M%d') = FORMATDATETIME(?,'%M%d')",dateToMySQLDate(Calendar.getInstance().getTime(),false));
              Base.commitTransaction();
              Iterator<Socio> it= clientes.iterator();
                 while(it.hasNext()){
@@ -88,7 +85,7 @@ public class CumpleaniosGui extends javax.swing.JInternalFrame {
                 date.setDate(date.getDate()+7);
                 clientes=null;
                  Base.openTransaction();
-                 clientes= Socio.findBySQL("select * from socios where DATE_FORMAT(fecha_nac,'%m %d') >= DATE_FORMAT( ?,'%m %d') AND DATE_FORMAT(fecha_nac, '%m%d') < DATE_FORMAT(?,'%m%d')", dateToMySQLDate(Calendar.getInstance().getTime(),false),dateToMySQLDate(date,false));
+                 clientes= Socio.findBySQL("select * from socios where FORMATDATETIME(fecha_nac,'%M%d') >= FORMATDATETIME( ?,'%M%d') AND FORMATDATETIME(fecha_nac, '%m%d') < FORMATDATETIME(?,'%M%d')", dateToMySQLDate(Calendar.getInstance().getTime(),false),dateToMySQLDate(date,false));
                 Base.commitTransaction();
                                 it= clientes.iterator();
                 while(it.hasNext()){
